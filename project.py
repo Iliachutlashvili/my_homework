@@ -41,7 +41,8 @@ def guess_the_number():
                 break
     else:
         print(f"Sorry, you've run out of attempts. The number was {secret_number}.")
-    
-if __name__ == "__main__":
-    guess_the_number()
+        
+guess_the_number()
+
+
 
