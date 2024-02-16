@@ -12,11 +12,13 @@ def guess_the_number():
     max_attempts = 7
     attempts = 0
     
-    print("Welcome to Guess the Number!")
-    print("Choose number from 1 to 20?")
+    print("Welcome to Guess the Number","\nChoose number from 1 to 20?")
     
     while attempts < max_attempts:
         try:
+            user_input = input("Enter your guess (between 1 and 100), or type 'exit' to end the game: ")
+            if user_input.lower() == 'exit':  #თუ თამაში მოგბეზრდა და დამთავრება გსურს exit ქომენდით დავასრულებთ თამაშს
+                return
             guess = int(input("Enter your guess (between 1 and 20): "))
             if guess < 1 or guess > 20:
                 print("I Said from 1 to 20! .")
