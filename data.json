@@ -1,0 +1,24 @@
+{
+     "Chat": [
+          {
+               "username": "Elene",
+               "message": "salami",
+               "date": "2024-02-12 17:39:33"
+          },
+          {
+               "username": "Davit",
+               "message": "salami",
+               "date": "2024-02-12 17:39:34"
+          },
+          {
+               "username": "Elene",
+               "message": "Elene left the chat...",
+               "date": "2024-02-12 17:39:35"
+          },
+          {
+               "username": "Davit",
+               "message": "Davit left the chat...",
+               "date": "2024-02-12 17:39:36"
+          }
+     ]
+}
