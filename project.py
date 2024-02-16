@@ -10,6 +10,7 @@ def guess_the_number():
     
     # მაქსიმალური ცდის რაოდენობა
     max_attempts = 7
+    # აქ ვინახავთ ცდების რაოდენობას
     attempts = 0
     
     print("Welcome to Guess the Number","\nChoose number from 1 to 20?")
@@ -30,7 +31,7 @@ def guess_the_number():
                 continue
             # თუ ისეთი ციფრი შეიყვანა რაც მოცემული არაა 1 დან 20 ის ჩათვლით ის 1 ცდა უკან გიბრუნდება.
             attempts += 1   
-            
+            #იუზერისგან გადაცემული ინფუთ რიცხვების მიხედვით გვეუბნება უფრო მაღალი ჩავწეროთ თუ დაბალი.
             if guess < secret_number:
                 print("Too low! Try again.")
             elif guess > secret_number:
