@@ -62,9 +62,17 @@ class Book:  #Book კლასი რომელიც გვიბრუნ�
     def __str__(self):
         return f"Title: {self.title}, Author: {self.author}, Release Date: {self.release_date}"
 
+class MagicBook(Book):
+    def __init__(self, title, author, release_date):
+        super().__init__(title, author, release_date)
+        print(self.title,"is singing")
+    
+
+
+
 class BookManager: #BookManager კლასი რომელიც გვაძლევს საშუალებას დავამატოთ ან ვნახოთ დამატებული წიგნები.
     def __init__(self):
-        self.books = [1,2]
+        self.books = []
 
     def add_book(self, book):
         self.books.append(book)
@@ -88,3 +96,15 @@ class BookManager: #BookManager კლასი რომელიც გვა�
             writer.writerow(['Title', 'Author', 'Release Date'])
             for book in self.books:
                 writer.writerow([book.title, book.author, book.release_date])
+
+
+class main:
+    book_manager = BookManager
+
+    human_input = input("book name: ")
+    author_input = input("Author name: ")
+    release_date_input = int(input("Release Date: "))
+    if human_input == "1":
+        new_book = Book(human_input,author_input,release_date_input )
+    elif human_input == "2":
+        new_book = MagicBook(human_input,author_input,release_date_input)
