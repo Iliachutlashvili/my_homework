@@ -52,7 +52,7 @@
 # # წიგნების მართვის აპლიკაცია
 
 
-class Book:
+class Book:  #Book კლასი რომელიც გვიბრუნებს წიგნის დასახელბას, ავტორს და გამოსვლის თარიღს
     def __init__(self, title, author, release_date):
         self.title = title
         self.author = author
@@ -61,7 +61,7 @@ class Book:
     def __str__(self):
         return f"Title: {self.title}, Author: {self.author}, Release Date: {self.release_date}"
 
-class BookManager:
+class BookManager: #BookManager კლასი რომელიც გვაძლევს საშუალებას დავამატოთ ან ვნახოთ დამატებული წიგნები.
     def __init__(self):
         self.books = []
 
