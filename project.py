@@ -71,3 +71,6 @@ class BookManager:
     def show_all_books(self):
         if not self.books:
             print("No books in the library.")
+        else:
+            for book in self.books:
+                print(book)
