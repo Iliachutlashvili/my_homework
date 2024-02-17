@@ -51,6 +51,7 @@
 
 # # წიგნების მართვის აპლიკაცია
 
+import csv
 
 class Book:  #Book კლასი რომელიც გვიბრუნებს წიგნის დასახელბას, ავტორს და გამოსვლის თარიღს
     def __init__(self, title, author, release_date):
@@ -63,7 +64,7 @@ class Book:  #Book კლასი რომელიც გვიბრუნ�
 
 class BookManager: #BookManager კლასი რომელიც გვაძლევს საშუალებას დავამატოთ ან ვნახოთ დამატებული წიგნები.
     def __init__(self):
-        self.books = []
+        self.books = [1,2]
 
     def add_book(self, book):
         self.books.append(book)
@@ -74,3 +75,16 @@ class BookManager: #BookManager კლასი რომელიც გვა�
         else:
             for book in self.books:
                 print(book)
+
+    def search_book(self, title):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                return book
+        return None
+
+    def save_to_csv(self, filename):
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Title', 'Author', 'Release Date'])
+            for book in self.books:
+                writer.writerow([book.title, book.author, book.release_date])
