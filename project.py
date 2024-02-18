@@ -53,6 +53,7 @@
 
 import csv
 import re
+import pygame
 
 class Book:  #Book კლასი რომელიც გვიბრუნებს წიგნის დასახელბას, ავტორს და გამოსვლის თარიღს
     def __init__(self, title, author, release_date):
@@ -64,13 +65,24 @@ class Book:  #Book კლასი რომელიც გვიბრუნ�
         return f"Title: {self.title}, Author: {self.author}, Release Date: {self.release_date}"
 
 class MagicBook(Book):
-    def __init__(self, title, author, release_date):
+    def __init__(self, title, author, release_date, music_file):
         super().__init__(title, author, release_date)
-        print(self.title,"is singing")
-    
+        self.music_file = music_file
+        music_file = 'Chaos.mp3'
+        self.is_playing = False
 
+    def play_music(self):
+        pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load(self.music_file)
+        pygame.mixer.music.play()
+        self.is_playing = True
 
+    def stop_music(self):
+        pygame.mixer.music.stop()
+        self.is_playing = False
 
+        
 class BookManager: #BookManager კლასი რომელიც გვაძლევს საშუალებას დავამატოთ ან ვნახოთ დამატებული წიგნები.
     def __init__(self):
         self.books = []
@@ -80,7 +92,7 @@ class BookManager: #BookManager კლასი რომელიც გვა�
 
     def show_all_books(self):
         if not self.books:
-            print("No books in the library.")
+            print("No books here Check in Library.")
         else:
             for book in self.books:
                 print(book)
@@ -98,6 +110,12 @@ class BookManager: #BookManager კლასი რომელიც გვა�
             for book in self.books:
                 writer.writerow([book.title, book.author, book.release_date])
 
+    def print_csv_data(self, filename):
+        with open(filename, 'r', newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                print(', '.join(row))
+
 def validate_input(prompt, regex_pattern):
     while True:
         user_input = input(prompt)
@@ -112,11 +130,13 @@ def main():
     while True:
         print("\nBook Management System")
         print("1. Add a new book")
-        print("2. View all books")
-        print("3. Call MagicBook to Sing")
-        print("4. Seach Books")
-        print("5. Save books in csv file")
-        print("6. Exit")
+        print("2. View Just Added books")
+        print("3. Seach Books")
+        print("4. Save books in csv file")
+        print("5. Enter secret name To get all books from library")
+        print("6. Bring The Chaos in Library! ")
+        print("7. Stop the Chaos")
+        print("8. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -132,13 +152,9 @@ def main():
         elif choice == '2':
             print("All Books:")
             book_manager.show_all_books()
-        elif choice == '3':
-            magic_title = "Magic Book"
-            magic_author = "Magic Author"
-            magic_release_date = "2024-02-17"  
-            magic_book = MagicBook(magic_title, magic_author, magic_release_date)
+
         
-        elif choice == '4':
+        elif choice == '3':
             title = input("Enter Book name to Search: ")
             book_found = book_manager.search_book(title)
             if book_found:
@@ -147,13 +163,32 @@ def main():
             else:
                 print("Book Not Found!")
 
-        elif choice == '5':
+        elif choice == '4':
             filename = input("Enter File name to save books: ")
             book_manager.save_to_csv(filename)
             print("Books saved in Csv file")
-
+        
+        elif choice == '5':
+            filename = input("Enter file name to print data: ")
+            book_manager.print_csv_data(filename)
 
         elif choice == '6':
+            print("Bringing The Chaos in Library!")
+            title = "Magic Book"
+            author = "Magic Author"
+            release_date = "2024-02-17"
+            music_file = 'chaos.mp3'
+            magic_book = MagicBook(title, author, release_date, music_file)
+            magic_book.play_music()
+
+        elif choice == '7':
+            print("Stopping the Chaos!")
+            if 'magic_book' in locals() and magic_book.is_playing:
+                magic_book.stop_music()
+            else:
+                print("Chaos is not happening now.")
+
+        elif choice == '8':
             print("Exiting program.")
             break
 
