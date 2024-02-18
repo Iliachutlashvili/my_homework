@@ -52,6 +52,7 @@
 # # წიგნების მართვის აპლიკაცია
 
 import csv
+import re
 
 class Book:  #Book კლასი რომელიც გვიბრუნებს წიგნის დასახელბას, ავტორს და გამოსვლის თარიღს
     def __init__(self, title, author, release_date):
@@ -97,14 +98,67 @@ class BookManager: #BookManager კლასი რომელიც გვა�
             for book in self.books:
                 writer.writerow([book.title, book.author, book.release_date])
 
+def validate_input(prompt, regex_pattern):
+    while True:
+        user_input = input(prompt)
+        if re.match(regex_pattern, user_input):
+            return user_input
+        else:
+            print("Invalid input. Please try again.")
 
-class main:
-    book_manager = BookManager
+def main():
+    book_manager = BookManager()
 
-    human_input = input("book name: ")
-    author_input = input("Author name: ")
-    release_date_input = int(input("Release Date: "))
-    if human_input == "1":
-        new_book = Book(human_input,author_input,release_date_input )
-    elif human_input == "2":
-        new_book = MagicBook(human_input,author_input,release_date_input)
+    while True:
+        print("\nBook Management System")
+        print("1. Add a new book")
+        print("2. View all books")
+        print("3. Call MagicBook to Sing")
+        print("4. Seach Books")
+        print("5. Save books in csv file")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            print("Add a New Book:")
+            title = validate_input("Enter book title: ", r'^[a-zA-Z0-9\s]+$')
+            author = validate_input("Enter author name: ", r'^[a-zA-Z\s]+$')
+            release_date = validate_input("Enter release date (YYYY-MM-DD): ", r'^\d{4}-\d{2}-\d{2}$')
+            new_book = Book(title, author, release_date)
+            book_manager.add_book(new_book)
+            print("Book added successfully.")
+
+        elif choice == '2':
+            print("All Books:")
+            book_manager.show_all_books()
+        elif choice == '3':
+            magic_title = "Magic Book"
+            magic_author = "Magic Author"
+            magic_release_date = "2024-02-17"  
+            magic_book = MagicBook(magic_title, magic_author, magic_release_date)
+        
+        elif choice == '4':
+            title = input("Enter Book name to Search: ")
+            book_found = book_manager.search_book(title)
+            if book_found:
+                print("Book found")
+                print(book_found)
+            else:
+                print("Book Not Found!")
+
+        elif choice == '5':
+            filename = input("Enter File name to save books: ")
+            book_manager.save_to_csv(filename)
+            print("Books saved in Csv file")
+
+
+        elif choice == '6':
+            print("Exiting program.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+main()
