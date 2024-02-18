@@ -64,7 +64,7 @@ class Book:  #Book კლასი რომელიც გვიბრუნ�
     def __str__(self):
         return f"Title: {self.title}, Author: {self.author}, Release Date: {self.release_date}"
 
-class MagicBook(Book):
+class MagicBook(Book):  # გასართობი კლასი რომელიც შემოიტანს ხალისს ჩვენს ბიბლიოთეკაში :D 
     def __init__(self, title, author, release_date, music_file):
         super().__init__(title, author, release_date)
         self.music_file = music_file
@@ -87,36 +87,36 @@ class BookManager: #BookManager კლასი რომელიც გვა�
     def __init__(self):
         self.books = []
 
-    def add_book(self, book):
+    def add_book(self, book):  # როდესაც კოდი ახალი გაშვებულია გვხვდება ცარიელი მასივი სადაც ვინახავ ახლად დამატებულ წიგნებს
         self.books.append(book)
 
-    def show_all_books(self):
+    def show_all_books(self):   # ახლად დამატებული ყველა წიგნის ნახვა
         if not self.books:
             print("No books here Check in Library.")
         else:
             for book in self.books:
                 print(book)
 
-    def search_book(self, title):
+    def search_book(self, title):   # წიგნების სერჩის ფუნქცია
         for book in self.books:
             if book.title.lower() == title.lower():
                 return book
         return None
 
-    def save_to_csv(self, filename):
+    def save_to_csv(self, filename):  # ფაილში შენახვა ახლად დამატებული წინების რომლებსაც ვიღებთ მასივიდან რადგან კოდის დახურვის და ახლიდან გაშვების შემთხვევაში არ დავკარგოთინფორმაცია
         with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Title', 'Author', 'Release Date'])
             for book in self.books:
                 writer.writerow([book.title, book.author, book.release_date])
 
-    def print_csv_data(self, filename):
+    def print_csv_data(self, filename):  # ფაილში შენახული ყველა წიგნის,ავტორის და დროის დაპრინტვა/გამოტანა
         with open(filename, 'r', newline='') as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 print(', '.join(row))
 
-def validate_input(prompt, regex_pattern):
+def validate_input(prompt, regex_pattern): 
     while True:
         user_input = input(prompt)
         if re.match(regex_pattern, user_input):
@@ -124,7 +124,7 @@ def validate_input(prompt, regex_pattern):
         else:
             print("Invalid input. Please try again.")
 
-def main():
+def main():  # მეინი უყურებს ბუქ მენეჯერს და გვაძლევს საშუალებას გადაწყვეტილებისამებრ გამოვიძახოთ ის ფუნქცია რომელიც ჩვენ გვინდა მოცემული ციფრების საშუალებით.
     book_manager = BookManager()
 
     while True:
@@ -140,11 +140,11 @@ def main():
 
         choice = input("Enter your choice: ")
 
-        if choice == '1':
+        if choice == '1':   
             print("Add a New Book:")
             title = validate_input("Enter book title: ", r'^[a-zA-Z0-9\s]+$')
             author = validate_input("Enter author name: ", r'^[a-zA-Z\s]+$')
-            release_date = validate_input("Enter release date (YYYY-MM-DD): ", r'^\d{4}-\d{2}-\d{2}$')
+            release_date = validate_input("Enter release date (YYYY-MM-DD): ", r'^\d{4}-\d{2}-\d{2}$')  # ამ ვალიდაციაზე კითხვა მაქვს და იმედია გავიხსენებ პრეზენტაციამდე 
             new_book = Book(title, author, release_date)
             book_manager.add_book(new_book)
             print("Book added successfully.")
