@@ -54,6 +54,7 @@
 import csv
 import re
 import pygame
+import os
 
 class Book:  #Book კლასი რომელიც გვიბრუნებს წიგნის დასახელბას, ავტორს და გამოსვლის თარიღს
     def __init__(self, title, author, release_date):
@@ -68,7 +69,7 @@ class MagicBook(Book):  # გასართობი კლასი რომ�
     def __init__(self, title, author, release_date, music_file):
         super().__init__(title, author, release_date)
         self.music_file = music_file
-        music_file = 'Chaos.mp3'
+        music_file = 'music\Chaos.mp3'
         self.is_playing = False
 
     def play_music(self):
@@ -177,7 +178,7 @@ def main():  # მეინი უყურებს ბუქ მენეჯ�
             title = "Magic Book"
             author = "Magic Author"
             release_date = "2024-02-17"
-            music_file = 'chaos.mp3'
+            music_file = 'music\chaos.mp3'
             magic_book = MagicBook(title, author, release_date, music_file)
             magic_book.play_music()
 
