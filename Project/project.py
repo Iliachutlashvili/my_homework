@@ -95,7 +95,7 @@ def main():  # მეინი უყურებს ბუქ მენეჯ�
             print("Add a New Book:")
             title = validate_input("Enter book title: ", r'^[a-zA-Z0-9\s]+$')
             author = validate_input("Enter author name: ", r'^[a-zA-Z\s]+$')
-            release_date = validate_input("Enter release date (YYYY-MM-DD): ", r'^\d{4}-\d{2}-\d{2}$')  # ამ ვალიდაციაზე კითხვა მაქვს და იმედია გავიხსენებ პრეზენტაციამდე 
+            release_date = validate_input("Enter release date (YYYY-MM-DD): ", r'^\d{4}-\d{2}-\d{2}$')
             new_book = Book(title, author, release_date)
             book_manager.add_book(new_book)
             print("Book added successfully.")
